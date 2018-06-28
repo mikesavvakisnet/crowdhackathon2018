@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 
 /* GET home page. */
 router.post('/sensit', function(req, res, next) {
-    console.log(req.body.glossary);
+    console.log(req.body);
     res.sendStatus(200);
 });
 

@@ -18,11 +18,13 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/sensit', function(req, res, next) {
-    res.send({problem: false,
-        temp: "22",
-        hum: "67",
-        airQ: "Good"
-    }).status(200);
+    pool.query('select temp,hum from data ORDER BY id DESC LIMIT 1;',  function (err, rows) {
+        res.send({problem: false,
+            temp: rows[0].temp,
+            hum: rows[0].hum,
+            airQ: "Good"
+        }).status(200);
+    });
 });
 
 router.get('/sensit/temp/average', function(req, res, next) {
@@ -57,9 +59,17 @@ router.get('/sensit/hum/average', function(req, res, next) {
 });
 
 router.get('/sensit/lightlamp', function(req, res, next) {
-    res.send({problem: false,
-        status:"ON"
-    }).status(200);
+    pool.query('select light from data ORDER BY id DESC LIMIT 1;',  function (err, rows) {
+        var status;
+        if(rows[0].light >  20){
+            status = "ON"
+        }else{
+            status = "OFF"
+        }
+        res.send({problem: false,
+            status: status
+        }).status(200);
+    });
 });
 
 router.get('/sensit/nodes', function(req, res, next) {
@@ -78,6 +88,19 @@ router.post('/sensit', function(req, res, next) {
 
 router.post('/sensit/alert', function(req, res, next) {
     pool.query('insert into alert (reason,date) values(?,?)', [req.body.reason,req.body.date], function (err, rows) {
+
+    });
+    res.sendStatus(200);
+});
+
+router.post('/sensit/data', function(req, res, next) {
+    var light = "";
+    if(req.body.ambient_light > 20){
+        light = "ON"
+    }else{
+        light = "OFF"
+    }
+    pool.query('insert into data (temp,hum,light) values(?,?,?)', [req.body.temperature,req.body.humidity,light], function (err, rows) {
 
     });
     res.sendStatus(200);

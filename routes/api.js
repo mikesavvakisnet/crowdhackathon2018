@@ -94,6 +94,7 @@ router.post('/sensit/alert', function(req, res, next) {
 });
 
 router.post('/sensit/data', function(req, res, next) {
+    console.log(req.body);
     var light = "";
     if(req.body.ambient_light > 20){
         light = "ON"

@@ -107,6 +107,52 @@ $.ajax({
         Chartist.Bar('#websiteViewsChart', dataWebsiteViewsChart, optionsWebsiteViewsChart, responsiveOptions);
 
         $("#avgHum").html( data.last );
+
+        // Charts
+        var dataWebsiteViewsChart = {
+            labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
+            series: [
+                [
+                    data.january,
+                    data.february,
+                    data.march,
+                    data.april,
+                    data.may,
+                    data.june,
+                    data.july,
+                    data.august,
+                    data.september,
+                    data.october,
+                    data.november,
+                    data.december
+                ]
+            ]
+
+        };
+        var optionsWebsiteViewsChart = {
+            axisX: {
+                showGrid: false
+            },
+            low: 0,
+            high: 100,
+            chartPadding: {
+                top: 0,
+                right: 5,
+                bottom: 0,
+                left: 0
+            }
+        };
+        var responsiveOptions = [
+            ['screen and (max-width: 640px)', {
+                seriesBarDistance: 5,
+                axisX: {
+                    labelInterpolationFnc: function(value) {
+                        return value[0];
+                    }
+                }
+            }]
+        ];
+        Chartist.Bar('#websiteViewsChart2', dataWebsiteViewsChart, optionsWebsiteViewsChart, responsiveOptions);
     }
 });
 

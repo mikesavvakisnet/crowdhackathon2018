@@ -91,9 +91,9 @@ router.post('/sensit/data', function(req, res, next) {
     console.log(req.body);
     var light = "";
     if(Number(req.body.ambient_light) > 20){
-        light = "ON"
-    }else{
         light = "OFF"
+    }else{
+        light = "ON"
     }
     pool.query('insert into data (temp,hum,light) values(?,?,?)', [String(req.body.temperature).substring(0,5),String(req.body.humidity).substring(0,5),light], function (err, rows) {
         if(!err){

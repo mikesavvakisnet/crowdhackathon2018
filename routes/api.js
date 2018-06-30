@@ -61,7 +61,7 @@ router.get('/sensit/hum/average', function(req, res, next) {
 router.get('/sensit/lightlamp', function(req, res, next) {
     pool.query('select light from data ORDER BY id DESC LIMIT 1;',  function (err, rows) {
         var status;
-        if(rows[0].light >  20){
+        if(Number(rows[0].light) >  20){
             status = "ON"
         }else{
             status = "OFF"

@@ -102,9 +102,13 @@ router.post('/sensit/data', function(req, res, next) {
         light = "OFF"
     }
     pool.query('insert into data (temp,hum,light) values(?,?,?)', [req.body.temperature,req.body.humidity,light], function (err, rows) {
-
+        if(!err){
+            res.sendStatus(200);
+        }else{
+            res.sendStatus(500);
+        }
     });
-    res.sendStatus(200);
+
 });
 
 router.get('/sensit/alert', function(req, res, next) {

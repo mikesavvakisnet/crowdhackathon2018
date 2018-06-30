@@ -96,12 +96,12 @@ router.post('/sensit/alert', function(req, res, next) {
 router.post('/sensit/data', function(req, res, next) {
     console.log(req.body);
     var light = "";
-    if(req.body.ambient_light > 20){
+    if(Number(req.body.ambient_light) > 20){
         light = "ON"
     }else{
         light = "OFF"
     }
-    pool.query('insert into data (temp,hum,light) values(?,?,?)', [req.body.temperature,req.body.humidity,light], function (err, rows) {
+    pool.query('insert into data (temp,hum,light) values(?,?,?)', [String(req.body.temperature),String(req.body.humidity),light], function (err, rows) {
         if(!err){
             res.sendStatus(200);
         }else{

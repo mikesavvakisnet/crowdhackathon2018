@@ -88,9 +88,10 @@ router.post('/sensit/alert', function(req, res, next) {
 });
 
 router.post('/sensit/data', function(req, res, next) {
-    if(req.body.temperature === "error"){
+    console.log(req.body);
+    /*if(req.body.temperature === "error"){
         return;
-    }
+    }*/
     var light = "";
     if(Number(req.body.ambient_light) > 20){
         light = "OFF"

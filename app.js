@@ -9,6 +9,7 @@ var nodesRouter = require('./routes/nodes');
 var alertsRouter = require('./routes/alerts');
 var apiRouter = require('./routes/api');
 var mapRouter = require('./routes/map');
+var hiddenRouter = require('./routes/hidden-button');
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use('/nodes', nodesRouter);
 app.use('/alerts', alertsRouter);
 app.use('/api', apiRouter);
 app.use('/map', mapRouter);
+app.use('/hidden', hiddenRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
